@@ -4,11 +4,11 @@ const router = express.Router();
 
 router.use(auth);
 
-router.use('/books', require('./books/post'));
-router.use('/books', require('./books/get'));
-router.use('/books', require('./books/update'));
-router.use('/books', require('./books/delete'));
-router.use('/books', require('./books/borrow'));
-router.use('/books', require('./books/return'));
+router.use('/', require('./books/post'));
+router.use('/', require('./books/get'));
+router.use('/', require('./books/update'));
+router.use('/', require('./books/delete'));
+router.use('/', require('./books/borrow'));
+router.use('/', require('./books/return'));
 
 module.exports = router;

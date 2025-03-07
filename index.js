@@ -3,7 +3,7 @@ const pool = require("./routes/db");
 const app = express();
 
 const logger = (req, res, next) =>{
-    console.log(`[${Date.now()}] ${req.method} ${res.url}`);
+    console.log(`[${Date.now()}] ${req.method} ${req.originalUrl}`);
 
     next();
 }
@@ -17,7 +17,7 @@ app.get("/", (req, res) => {
 app.use(express.json());
   
 //addBook("48 Laws of Power", "John", 2);
-app.use('/api', require('./routes/books'));
+app.use('/api/books', require('./routes/books'));
 
 const port = 5000;
 app.listen(port, () => {

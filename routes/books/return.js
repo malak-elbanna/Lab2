@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../db");
 const router = express.Router();
 
-router.post("/books/:id/return", async (req, res) => {
+router.post("/:id/return", async (req, res) => {
     try {
         const id = req.params.id;
 
@@ -16,11 +16,11 @@ router.post("/books/:id/return", async (req, res) => {
         }
 
         if (result.rows[0].available) {
-            res.join({message:"Book hasn't been borrowed in the first place 😡"});
+            res.json({message:"Book hasn't been borrowed in the first place 😡"});
             return;
         }
 
-        const updateStatus = "update set available = true where id=$1";
+        const updateStatus = "update book set available = true where id=$1";
         await pool.query(updateStatus, vals);
 
         res.json({message: "Retuned sucessfully. thank uuu"});

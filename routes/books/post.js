@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../db");
 const router = express.Router();
 
-router.post("/books", async (req, res) => {
+router.post("/", async (req, res) => {
     try {
         const { title, author, edition } = req.body;
   

@@ -2,7 +2,7 @@ const express = require("express");
 const pool = require("../db");
 const router = express.Router();
 
-router.delete("/books/:id", async (req, res) => {
+router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
   

@@ -1,11 +1,12 @@
-const authMiddleware = (req, res, next) => {
-    const header = req.headers.authorization;
-
-    if (!header || header !== "Bearer ZEWAIL") {
-        return res.json({ error: "Unauthorized access" });
+const auth = (req, res, next) => {
+    const authHeader = req.headers['authorization'];
+    if (authHeader && authHeader.startsWith('Bearer ')) {
+        const token = authHeader.split(' ')[1];
+        if (token === 'ZEWAIL') {
+            return next();
+        }
     }
-
-    next();
+    res.status(403).json({ error: 'Forbidden' });
 };
 
-module.exports = authMiddleware;
+module.exports = auth;
