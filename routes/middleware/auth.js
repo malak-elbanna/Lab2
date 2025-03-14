@@ -8,7 +8,7 @@ const auth = (req, res, next) => {
             return next();
         }
     }
-    res.json({ error: 'no authorizations' });
+    res.json({ error: 'no authorization' });
 };
 
 module.exports = auth;
