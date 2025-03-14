@@ -1,44 +1,35 @@
 require("dotenv").config(); 
-const { Pool } = require("pg");
+const { Client } = require("pg");
 const sequelize = require('./sequalize');
+const blog = require('./mongo'); 
 const { DataTypes } = require('sequelize');
 
-const pool = new Pool({
+const client = new Client({
   connectionString: process.env.DATABASE_URL,
 });
 
-const Book = sequelize.define('Book', {
-    title: {
+const Author = sequelize.define('Author', {
+    name: {
         type: DataTypes.STRING,
         allowNull: false
     },
-
-    author: {
+    bio: {
         type: DataTypes.STRING,
         allowNull: false
-    },
-
-    edition: {
-        type: DataTypes.STRING,
-        allowNull: false
-    },
-
-    available: {
-        type: DataTypes.BOOLEAN,
-        defaultValue: true,
     }
 }, {
-    tableName: 'book',
+    tableName: 'author',
+    timestamps: true 
 });
 
 async function main() {
-  await pool.connect()
+  await client.connect()
     .then(() => console.log("db Connected"))
   
-  await sequelize.sync({ force: true })
-    .then(() => console.log("book table created"))
+  await sequelize.sync({ alter: true }) 
+    .then(() => console.log("author table ok"))
   
 }
 
 main();
-module.exports = pool;
+module.exports = { client, blog, Author }; 

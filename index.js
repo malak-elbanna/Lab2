@@ -1,23 +1,24 @@
 const express = require("express");
-const pool = require("./routes/db");
+const { client, blog, Author } = require("./routes/db"); 
 const app = express();
 
-const logger = (req, res, next) =>{
+const logger = (req, res, next) => {
     console.log(`[${Date.now()}] ${req.method} ${req.originalUrl}`);
-
     next();
-}
+};
 
 app.use(logger);
+app.use(express.json());
+
+const auth = require('./routes/middleware/auth');
+
+app.use('/api/blogs', require('./routes/blogs')); 
 
 app.get("/", (req, res) => {
     res.send("heyyyy");
 });
 
-app.use(express.json());
-  
-//addBook("48 Laws of Power", "John", 2);
-app.use('/api/books', require('./routes/books'));
+app.use('/api/authors', require('./routes/authors'));
 
 const port = 5000;
 app.listen(port, () => {

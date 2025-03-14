@@ -1,19 +1,18 @@
 const express = require("express");
-const pool = require("../db");
+const { Author } = require("../db"); 
 const router = express.Router();
 
 router.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
   
-        const query = "Delete from book where id=$1";
-        const values = [id];
-  
-        await pool.query(query, values);
-        res.json({message: "book deleted"});
+        const result = await Author.destroy({ where: { id } });
+        
+        if (result === 0) return res.json({ message: "author missing try another? :''" });
+        
+        res.json({ message: "author deleted" });
     }
     catch (err) {
-        console.error("error:", err);
         res.json({ error: err.message });
     }
 });
