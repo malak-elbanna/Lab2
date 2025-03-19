@@ -1,24 +1,23 @@
 require("dotenv").config(); 
 const { Client } = require("pg");
 const sequelize = require('./sequalize');
-const blog = require('./mongo'); 
 const { DataTypes } = require('sequelize');
 
 const client = new Client({
   connectionString: process.env.DATABASE_URL,
 });
 
-const Author = sequelize.define('Author', {
-    name: {
+const Task = sequelize.define('Task', {
+    title: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    bio: {
+    description: {
         type: DataTypes.STRING,
         allowNull: false
     }
 }, {
-    tableName: 'author',
+    tableName: 'task',
     timestamps: true 
 });
 
@@ -27,9 +26,9 @@ async function main() {
     .then(() => console.log("db Connected"))
   
   await sequelize.sync({ alter: true }) 
-    .then(() => console.log("author table ok"))
+    .then(() => console.log("task table ok"))
   
 }
 
 main();
-module.exports = { client, blog, Author }; 
+module.exports = { client, Task }; 

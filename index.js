@@ -1,5 +1,5 @@
 const express = require("express");
-const { client, blog, Author } = require("./routes/db"); 
+const { client, Task } = require("./routes/db"); 
 const app = express();
 
 const logger = (req, res, next) => {
@@ -10,15 +10,11 @@ const logger = (req, res, next) => {
 app.use(logger);
 app.use(express.json());
 
-const auth = require('./routes/middleware/auth');
-
-app.use('/api/blogs', require('./routes/blogs')); 
+app.use('/api/tasks', require('./routes/tasks')); 
 
 app.get("/", (req, res) => {
     res.send("heyyyy");
 });
-
-app.use('/api/authors', require('./routes/authors'));
 
 const port = 5000;
 app.listen(port, () => {
