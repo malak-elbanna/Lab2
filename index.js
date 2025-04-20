@@ -1,8 +1,14 @@
 const express = require("express");
-const { client, Task } = require("./routes/db"); 
+const mongoose = require('mongoose');
+const auth = require('./routes/auth');
+const user = require('./routes/user');
+const dotenv = require('dotenv').config();
 const app = express();
 
-const logger = (req, res, next) => {
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => console.log('mongo connected'))
+
+    const logger = (req, res, next) => {
     console.log(`[${Date.now()}] ${req.method} ${req.originalUrl}`);
     next();
 };
@@ -10,13 +16,14 @@ const logger = (req, res, next) => {
 app.use(logger);
 app.use(express.json());
 
-app.use('/api/tasks', require('./routes/tasks')); 
+app.use("/api/auth", auth);
+app.use("/api/user", user); 
 
 app.get("/", (req, res) => {
     res.send("heyyyy");
 });
 
-const port = 5000;
+const port = process.env.PORT;
 app.listen(port, () => {
     console.log('server running');
 });
