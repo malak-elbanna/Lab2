@@ -1,7 +1,7 @@
 const axios = require('axios');
 
 const apiClient = axios.create({
-  timeout: 5000,
+  timeout: 10000,
 });
 
 module.exports = apiClient;

@@ -5,4 +5,4 @@ test('fetchISS should return coordinates and timestamp', async () => {
   expect(data).toHaveProperty('time');
   expect(data).toHaveProperty('latitude');
   expect(data).toHaveProperty('longitude');
-});
+}, 10000);
