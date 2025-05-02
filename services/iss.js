@@ -10,7 +10,7 @@ async function fetchISS() {
       longitude: iss_position.longitude
     };
   } catch (err) {
-    throw new Error(`Failed to fetch ISS location: ${err.message}`);
+    throw new Error(`failed to fetch ISS location :((: ${err.message}`);
   }
 }
 module.exports = { fetchISS };

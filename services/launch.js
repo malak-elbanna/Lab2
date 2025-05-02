@@ -13,9 +13,9 @@ async function fetchLaunches(filter = {}) {
       launches = launches.filter(l => l.date.startsWith(filter.date));
     }
 
-    return launches.length ? launches : ['No upcoming launches found'];
+    return launches.length ? launches : ['no upcoming launches found'];
   } catch (err) {
-    throw new Error(`Failed to fetch upcoming launches: ${err.message}`);
+    throw new Error(`failed to fetch upcoming launches :(: ${err.message}`);
   }
 }
 
