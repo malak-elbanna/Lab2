@@ -1,8 +1,8 @@
-const axios = require('axios');
+const apiClient = require('../utils/apiClient');
 
 async function fetchISS() {
   try {
-    const response = await axios.get('http://api.open-notify.org/iss-now.json');
+    const response = await apiClient.get('http://api.open-notify.org/iss-now.json');
     const { timestamp, iss_position } = response.data;
     return {
       time: new Date(timestamp * 1000).toISOString(),

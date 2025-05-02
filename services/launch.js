@@ -1,8 +1,8 @@
-const axios = require('axios');
+const apiClient = require('../utils/apiClient');
 
 async function fetchLaunches(filter = {}) {
   try {
-    const response = await axios.get('https://ll.thespacedevs.com/2.2.0/launch/upcoming/');
+    const response = await apiClient.get('https://ll.thespacedevs.com/2.2.0/launch/upcoming/');
     let launches = response.data.results.map(launch => ({
       mission: launch.name,
       vehicle: launch.rocket.configuration.name,
