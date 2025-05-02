@@ -5,9 +5,10 @@ async function getAPOD() {
   try {
     const res = await apiClient.get(`https://api.nasa.gov/planetary/apod?api_key=${NASA_API_KEY}`);
     const { title, explanation, date, url } = res.data;
+    
     return { title, explanation, date, url };
   } catch (err) {
-    throw new Error('failed to fetch APOD');
+    throw new Error(`failed :( ${err.message}`);
   }
 }
 
