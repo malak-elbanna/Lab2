@@ -13,7 +13,7 @@ git clone https://github.com/malak-elbanna/Lab2.git
 npm install
 ```
 
-## Setup
+## Example Output
 ```bash
 NASA Astronomy Picture of the Day
 title: Young Star Cluster NGC 346
